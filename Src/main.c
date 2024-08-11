@@ -24,8 +24,8 @@
 #include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
-/* USER CODE BEGIN Includes */
-
+/* USER CODE BEGINIncludes */
+#include "ads131m0x.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -97,9 +97,11 @@ int main(void)
   MX_TIM8_Init();
   MX_SPI1_Init();
   MX_TIM7_Init();
-  /* USER CODE BEGIN 2 */
-	HAL_GPIO_WritePin(LED_HEARTBEAT_GPIO_Port, LED_HEARTBEAT_Pin, GPIO_PIN_SET);
+  
+	/* USER CODE BEGIN 2 */
+	adcStartup();
 	
+	//HAL_GPIO_WritePin(LED_HEARTBEAT_GPIO_Port, LED_HEARTBEAT_Pin, GPIO_PIN_SET);
   /* USER CODE END 2 */
 
   /* Infinite loop */
