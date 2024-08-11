@@ -283,7 +283,7 @@ bool getSYNC_RESET(void)
 //! \return None.
 //
 //*****************************************************************************
-void setCS(const bool state)
+void setCS(const bool state)  //do nothing as the is no CS-Selection between ADC und yC
 {
 //    /* --- INSERT YOUR CODE HERE --- */
 
@@ -446,7 +446,7 @@ bool waitForDRDYinterrupt(const uint32_t timeout_ms) // JLXYLKJLJKÖKGMDSMM MM MD
 //! \return None.
 //
 //*****************************************************************************
-void InitSPI(void) // JXHGYJFDGHDKJFHXYJKLVJCYXLKVXHCVJKHXJCKLVHXCKJYVHYHKJHKH JHCXYKJVHKJXCYHVLKYXCVHKJ
+void InitSPI(void) 
 {
     /* --- INSERT YOUR CODE HERE ---
      * NOTE: The ADS131M0x operates in SPI mode 1 (CPOL = 0, CPHA = 1).
@@ -568,7 +568,33 @@ void spiSendReceiveArrays(const uint8_t dataTx[], uint8_t dataRx[], const uint8_
 //! \return Captured MISO response byte.
 //
 //*****************************************************************************
-uint8_t spiSendReceiveByte(const uint8_t dataTx) // FEHLELELNKJFDGLKJDSHFDKÖHGFDSKLJGSFG
+// moglichkeiten zur besseren Fehlererkennung
+bool HAL_DataGetNonBlocking (const uint32_t SP1_Base_Adr, uint32_t * junkk){
+	
+  HAL_StatusTypeDef status;
+	bool sts;
+	uint8_t puffer;
+	
+	//SPI_FLAG_RXNE gibt an, ob neue SPI-Daten verfügbar sind
+	if (__HAL_SPI_GET_FLAG(&hspi1, SPI_FLAG_RXNE)) //zeigt an, ob neue Daten zum lesen vorhanden sind
+        {
+            // Empfange Daten, wenn verfügbar
+            status = HAL_SPI_Receive(&hspi1, &puffer, 1, HAL_MAX_DELAY);
+						*junkk = (uint32_t) puffer;
+				
+            if (status == HAL_OK)
+            {
+                sts = 1;
+            }
+            else
+            {
+                sts = 0;
+            }
+        }
+				return sts;
+}
+
+uint8_t spiSendReceiveByte(uint8_t dataTx) 
 {
     /*  --- INSERT YOUR CODE HERE ---
      *  This function should send and receive single bytes over the SPI.
@@ -578,12 +604,17 @@ uint8_t spiSendReceiveByte(const uint8_t dataTx) // FEHLELELNKJFDGLKJDSHFDKÖHGFD
 
     // Remove any residual or old data from the receive FIFO
     uint32_t junk;
-    while (SSIDataGetNonBlocking(SSI_BASE_ADDR, &junk));
+    while (HAL_DataGetNonBlocking(SPI1_BASE, &junk));
 
     // SSI TX & RX
     uint8_t dataRx;
-    MAP_SSIDataPut(SSI_BASE_ADDR, (uint32_t) dataTx);
-    MAP_SSIDataGet(SSI_BASE_ADDR, (uint32_t *) &dataRx);
+	
+		HAL_SPI_Transmit(&hspi1, &dataTx, 1, HAL_MAX_DELAY);
+    //MAP_SSIDataPut(SSI_BASE_ADDR, (uint32_t) dataTx);
+		HAL_SPI_Receive(&hspi1, &dataRx, 1, HAL_MAX_DELAY);
+    //(SSI_BASE_ADDR, (uint32_t *) &dataRx);
 
     return dataRx;
 }
+
+

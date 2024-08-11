@@ -115,9 +115,10 @@ void    setSYNC_RESET(const bool state);
 void    toggleSYNC(void);
 void    toggleRESET(void);
 void    spiSendReceiveArrays(const uint8_t DataTx[], uint8_t DataRx[], const uint8_t byteLength);
-uint8_t spiSendReceiveByte(const uint8_t dataTx);
+uint8_t spiSendReceiveByte(uint8_t dataTx); //const
 bool    waitForDRDYinterrupt(const uint32_t timeout_ms);
-void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin);
+void 		HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin);
+bool 		HAL_DataGetNonBlocking (const uint32_t SP1_Base_Adr, uint32_t * junkk);
 
 // Functions used for testing only
 bool    getCS(void);
