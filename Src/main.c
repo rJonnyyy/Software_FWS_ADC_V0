@@ -46,7 +46,8 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-
+uint8_t ADC_Platine_F = 1;
+uint8_t TxData_ADC[8];	
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -68,7 +69,8 @@ int main(void)
 {
 
   /* USER CODE BEGIN 1 */
-
+	
+	
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -99,6 +101,7 @@ int main(void)
   MX_TIM7_Init();
   
 	/* USER CODE BEGIN 2 */
+	can_init(); 									// Can initialisieren
 	adcStartup();
 	
 	//HAL_GPIO_WritePin(LED_HEARTBEAT_GPIO_Port, LED_HEARTBEAT_Pin, GPIO_PIN_SET);
@@ -109,7 +112,9 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-
+			TxData_ADC[7] = 0xFF;
+			can_send_ADC(TxData_ADC);
+			delay_ms(500);
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */

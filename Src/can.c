@@ -209,5 +209,52 @@ void HAL_CAN_MspDeInit(CAN_HandleTypeDef* canHandle)
 }
 
 /* USER CODE BEGIN 1 */
+// Deklarierung 
 
+extern uint8_t ADC_Platine_F;
+CAN_TxHeaderTypeDef TxHeader_ADC; //Tranceive
+uint32_t TxMailbox_ADC; 
+
+void can_init() {
+	
+	HAL_GPIO_WritePin(CAN1_STB_GPIO_Port, CAN1_STB_Pin, GPIO_PIN_SET);
+	
+	if (HAL_CAN_Start(&hcan1) != HAL_OK)
+	{
+		Error_Handler();
+	}
+	
+	if(ADC_Platine_F == 1) { 
+		TxHeader_ADC.StdId = 0x1A0;
+		TxHeader_ADC.ExtId = 0x01;
+		TxHeader_ADC.RTR = CAN_RTR_DATA;
+		TxHeader_ADC.IDE = CAN_ID_STD;
+		TxHeader_ADC.DLC = 8;
+		TxHeader_ADC.TransmitGlobalTime = DISABLE;
+	}
+	if(ADC_Platine_F == 0) {
+		TxHeader_ADC.StdId = 0x1A1;
+		TxHeader_ADC.ExtId = 0x02;
+		TxHeader_ADC.RTR = CAN_RTR_DATA;
+		TxHeader_ADC.IDE = CAN_ID_STD;
+		TxHeader_ADC.DLC = 8;
+		TxHeader_ADC.TransmitGlobalTime = DISABLE;
+	}
+}
+	
+void can_send_ADC(uint8_t TxData_ADC [8]) {
+	
+	static int LED_stime = 0;
+		
+		if (HAL_CAN_AddTxMessage(&hcan1, &TxHeader_ADC, TxData_ADC, &TxMailbox_ADC) != HAL_OK) {
+			Error_Handler();
+		}
+		
+		else {
+			if (HAL_GetTick() >= LED_stime) {
+				LED_stime += 500;
+				HAL_GPIO_TogglePin(GPIOC, LED_USER2_Pin);
+			}
+		}
+}
 /* USER CODE END 1 */

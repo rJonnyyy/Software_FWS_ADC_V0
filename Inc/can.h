@@ -42,7 +42,8 @@ extern CAN_HandleTypeDef hcan2;
 
 void MX_CAN1_Init(void);
 void MX_CAN2_Init(void);
-
+void can_init(void);
+void can_send_ADC(uint8_t TxData_ADC[8]);
 /* USER CODE BEGIN Prototypes */
 
 /* USER CODE END Prototypes */
