@@ -76,13 +76,13 @@ uint8_t     getWordByteLength(void);
 //! \return unsigned 16-bit register value.
 //
 //*****************************************************************************
+//lies die Registerwerte aus dem Abbild => keine akutellen Registerwerte
+
 uint16_t getRegisterValue(uint8_t address)
 {
     assert(address < NUM_REGISTERS);
     return registerMap[address];
 }
-
-
 
 //*****************************************************************************
 //
@@ -97,6 +97,7 @@ uint16_t getRegisterValue(uint8_t address)
 //! \return None.
 //
 //*****************************************************************************
+//möglichkeit zur besseren Fehlerbehandlung
 void adcStartup(void)
 {
 	/* (OPTIONAL) Provide additional delay time for power supply settling */
@@ -115,7 +116,8 @@ void adcStartup(void)
     /* (OPTIONAL) Validate first response word when beginning SPI communication: (0xFF20 | CHANCNT) */
 	uint16_t response = sendCommand(OPCODE_NULL);
 
-	/* (OPTIONAL) Define your initial register settings here */
+	/* Define your initial register settings here */
+	//Change the OSR-Value to 256
     writeSingleRegister(CLOCK_ADDRESS, (CLOCK_DEFAULT & ~CLOCK_OSR_MASK) | CLOCK_OSR_256);
 
     /* (REQUIRED) Configure MODE register settings
@@ -685,6 +687,8 @@ uint16_t calculateCRC(const uint8_t dataBytes[], uint8_t numberBytes, uint16_t i
 //! \return None.
 //
 //*****************************************************************************
+//#define clock_notdefault_OSR256 				((uint16_t) 0x0F06)
+
 void restoreRegisterDefaults(void)
 {
     registerMap[ID_ADDRESS]             =   0x00;               /* NOTE: This a read-only register */
