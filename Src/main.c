@@ -102,12 +102,13 @@ int main(void)
   MX_TIM7_Init();
   
 	/* USER CODE BEGIN 2 */
-	HAL_TIM_Base_Start_IT(&htim7);
+	//HAL_TIM_Base_Start_IT(&htim7); //nacschauen ob Sinn hat
 	
 	can_init(); 									// Can initialisieren
 	adcStartup();
 	
-	HAL_GPIO_WritePin(GPIOA, nSYNC_nRESET_PIN, true);
+	//Reset pin vom adc, adc neu starten 
+	//HAL_GPIO_WritePin(GPIOA, nSYNC_nRESET_PIN, true);
 	
 	//HAL_GPIO_WritePin(LED_HEARTBEAT_GPIO_Port, LED_HEARTBEAT_Pin, GPIO_PIN_SET);
   /* USER CODE END 2 */
@@ -119,11 +120,19 @@ int main(void)
     /* USER CODE END WHILE */
 			TxData_ADC[7] = 0xFF;
 			can_send_ADC(TxData_ADC);
-			//delay_ms(500);
+			delay_ms(5);
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
 }
+
+
+//ABLAUF:
+//auf data rdy warten
+//readdata 
+//can_send
+
+
 
 /**
   * @brief System Clock Configuration

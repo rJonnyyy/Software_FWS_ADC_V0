@@ -85,15 +85,17 @@
 //
 //*****************************************************************************
 
-#define nDRDY_PORT          (GPIO_PORTM_BASE)
-#define nDRDY_PIN           (GPIO_PIN_0)
-#define nDRDY_INT           (INT_GPIOM)
 
-#define nCS_PORT            (GPIO_PORTK_BASE)
-#define nCS_PIN             (GPIO_PIN_5)
+// PINS anpassen
+//#define nDRDY_PORT          (GPIO_PORTM_BASE)
+//#define nDRDY_PIN           (GPIO_PIN_0)
+//#define nDRDY_INT           (INT_GPIOM)
 
-#define nSYNC_nRESET_PORT   (GPIO_PORTK_BASE)
-#define nSYNC_nRESET_PIN    (GPIO_PIN_4)
+//#define nCS_PORT            (GPIO_PORTK_BASE)
+//#define nCS_PIN             (GPIO_PIN_5)
+
+//#define nSYNC_nRESET_PORT   (GPIO_PORTK_BASE)
+//#define nSYNC_nRESET_PIN    (GPIO_PIN_4)
 
 // (OPTIONAL) External clock source
 //#define CLKIN_PORT          (GPIO_PORTG_BASE)

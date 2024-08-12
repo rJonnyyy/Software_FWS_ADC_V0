@@ -405,7 +405,8 @@ bool waitForDRDYinterrupt(const uint32_t timeout_ms) // JLXYLKJLJKÖKGMDSMM MM MD
 
     // Convert ms to a # of loop iterations, OR even better use a timer here...
     uint32_t timeout = timeout_ms * 6000;   // convert to # of loop iterations
-
+   	// Kann man mit HAL_getTick ersetzen
+	
     // Reset interrupt flag
     flag_nDRDY_INTERRUPT = false;
 

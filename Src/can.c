@@ -218,6 +218,7 @@ uint32_t TxMailbox_ADC;
 void can_init() {
 	
 	HAL_GPIO_WritePin(CAN1_STB_GPIO_Port, CAN1_STB_Pin, GPIO_PIN_SET);
+	//evtl. STB Pin reseten und nicht set
 	
 	if (HAL_CAN_Start(&hcan1) != HAL_OK)
 	{
