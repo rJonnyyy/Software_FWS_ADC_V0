@@ -3,7 +3,7 @@
 <title>Static Call Graph - [ADC_Software\ADC_Software.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image ADC_Software\ADC_Software.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6210000: Last Updated: Mon Aug 12 20:29:05 2024
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6210000: Last Updated: Sun Aug 25 11:40:00 2024
 <BR><P>
 <H3>Maximum Stack Usage =        288 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -775,6 +775,7 @@ Global Symbols
 </UL>
 <BR>[Called By]<UL><LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;toggleRESET
 <LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
+<LI><a href="#[66]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
 <P><STRONG><a name="[8e]"></a>HAL_GPIO_EXTI_Callback</STRONG> (Thumb, 20 bytes, Stack size 0 bytes, hal.o(.text.HAL_GPIO_EXTI_Callback))
@@ -811,12 +812,12 @@ Global Symbols
 <LI><a href="#[9f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_WaitFlagStateUntilTimeout
 <LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_SPI_Receive
 <LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_SPI_Transmit
-<LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_Delay
 <LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_CAN_Start
 <LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_CAN_Init
 <LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_RCC_ClockConfig
 <LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_RCC_OscConfig
 <LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;can_send_ADC
+<LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_Delay
 </UL>
 
 <P><STRONG><a name="[b9]"></a>HAL_IncTick</STRONG> (Thumb, 26 bytes, Stack size 0 bytes, stm32f4xx_hal.o(.text.HAL_IncTick))
@@ -1212,7 +1213,7 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f405xx.o(RESET)
 </UL>
-<P><STRONG><a name="[bb]"></a>adcStartup</STRONG> (Thumb, 268 bytes, Stack size 40 bytes, ads131m0x.o(.text.adcStartup))
+<P><STRONG><a name="[bb]"></a>adcStartup</STRONG> (Thumb, 274 bytes, Stack size 40 bytes, ads131m0x.o(.text.adcStartup))
 <BR><BR>[Stack]<UL><LI>Max Depth = 288 + Unknown Stack Size
 <LI>Call Chain = adcStartup &rArr; toggleRESET &rArr; writeSingleRegister &rArr; readSingleRegister &rArr; spiSendReceiveArrays &rArr; HAL_SPI_Receive &rArr; HAL_SPI_TransmitReceive &rArr; SPI_WaitFlagStateUntilTimeout
 </UL>
@@ -1257,7 +1258,7 @@ Global Symbols
 <LI><a href="#[66]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[66]"></a>main</STRONG> (Thumb, 80 bytes, Stack size 0 bytes, main.o(.text.main))
+<P><STRONG><a name="[66]"></a>main</STRONG> (Thumb, 98 bytes, Stack size 0 bytes, main.o(.text.main))
 <BR><BR>[Stack]<UL><LI>Max Depth = 288 + Unknown Stack Size
 <LI>Call Chain = main &rArr; adcStartup &rArr; toggleRESET &rArr; writeSingleRegister &rArr; readSingleRegister &rArr; spiSendReceiveArrays &rArr; HAL_SPI_Receive &rArr; HAL_SPI_TransmitReceive &rArr; SPI_WaitFlagStateUntilTimeout
 </UL>
@@ -1265,6 +1266,7 @@ Global Symbols
 <LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;can_send_ADC
 <LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;adcStartup
 <LI><a href="#[c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;can_init
+<LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_Delay
 <LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_TIM7_Init
 <LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_SPI1_Init
 <LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_TIM8_Init
@@ -1331,15 +1333,15 @@ Global Symbols
 <LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;adcStartup
 </UL>
 
-<P><STRONG><a name="[be]"></a>toggleRESET</STRONG> (Thumb, 118 bytes, Stack size 16 bytes, hal.o(.text.toggleRESET))
+<P><STRONG><a name="[be]"></a>toggleRESET</STRONG> (Thumb, 170 bytes, Stack size 16 bytes, hal.o(.text.toggleRESET))
 <BR><BR>[Stack]<UL><LI>Max Depth = 248 + Unknown Stack Size
 <LI>Call Chain = toggleRESET &rArr; writeSingleRegister &rArr; readSingleRegister &rArr; spiSendReceiveArrays &rArr; HAL_SPI_Receive &rArr; HAL_SPI_TransmitReceive &rArr; SPI_WaitFlagStateUntilTimeout
 </UL>
 <BR>[Calls]<UL><LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_RCC_GetHCLKFreq
-<LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_Delay
 <LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;writeSingleRegister
 <LI><a href="#[c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;restoreRegisterDefaults
 <LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
+<LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_Delay
 </UL>
 <BR>[Called By]<UL><LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;adcStartup
 </UL>

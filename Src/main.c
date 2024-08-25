@@ -101,10 +101,16 @@ int main(void)
   MX_SPI1_Init();
   MX_TIM7_Init();
   
+	
+	
 	/* USER CODE BEGIN 2 */
 	//HAL_TIM_Base_Start_IT(&htim7); //nacschauen ob Sinn hat
 	
+	HAL_Delay(500);
+	
 	can_init(); 									// Can initialisieren
+	HAL_Delay(500);
+	
 	adcStartup();
 	
 	//Reset pin vom adc, adc neu starten 
@@ -113,6 +119,7 @@ int main(void)
 	//HAL_GPIO_WritePin(LED_HEARTBEAT_GPIO_Port, LED_HEARTBEAT_Pin, GPIO_PIN_SET);
   /* USER CODE END 2 */
 
+
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
@@ -120,7 +127,7 @@ int main(void)
     /* USER CODE END WHILE */
 			TxData_ADC[7] = 0xFF;
 			can_send_ADC(TxData_ADC);
-			delay_ms(5);
+			delay_ms(500);
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */

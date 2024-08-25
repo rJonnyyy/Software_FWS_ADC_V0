@@ -106,9 +106,14 @@ void adcStartup(void)
 	/* (REQUIRED) Set nRESET pin high for ADC operation */
 	setSYNC_RESET(HIGH);
 
+	
+	
 	/* (OPTIONAL) Toggle nRESET pin to ensure default register settings. */
 	/* NOTE: This also ensures that the device registers are unlocked.	 */
 	toggleRESET();
+	
+	delay_ms(50);
+	
 
     /* (REQUIRED) Initialize internal 'registerMap' array with device default settings */
 	restoreRegisterDefaults();

@@ -131,6 +131,14 @@ void delay_ms(const uint32_t delay_time_ms)
 //*****************************************************************************
 void delay_us(const uint32_t delay_time_us)
 {
+	if (!(DWT->CTRL & DWT_CTRL_CYCCNTENA_Msk)) { // Check if DWT counter is not already enabled
+        // Enable TRC (Trace Control) for the DWT unit
+        CoreDebug->DEMCR |= CoreDebug_DEMCR_TRCENA_Msk;
+        // Enable the cycle counter
+        DWT->CYCCNT = 0; // Clear the cycle counter
+        DWT->CTRL |= DWT_CTRL_CYCCNTENA_Msk; // Enable cycle counter
+    }
+	
 	uint32_t microseconds = delay_time_us; // VOLATILE IM FALL DER F'LLE
 	uint32_t clk_cycle_start = DWT -> CYCCNT;
  
@@ -368,12 +376,15 @@ void toggleRESET(void)
 		HAL_GPIO_WritePin(GPIOA, 3, HIGH);
     //MAP_GPIOPinWrite(nSYNC_nRESET_PORT, nSYNC_nRESET_PIN, nSYNC_nRESET_PIN);
 
+	HAL_GPIO_WritePin(LED_ERROR_GPIO_Port, LED_ERROR_Pin, GPIO_PIN_SET);
     // tREGACQ delay before communicating with the device again
     delay_us(5);
 
     // NOTE: The ADS131M0x's next response word should be (0xFF20 | CHANCNT).
     // A different response may be an indication that the device did not reset.
 
+	
+	
     // Update register array
     restoreRegisterDefaults();
 
