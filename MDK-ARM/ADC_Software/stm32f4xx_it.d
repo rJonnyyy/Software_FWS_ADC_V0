@@ -32,4 +32,6 @@ adc_software/stm32f4xx_it.o: ..\Src\stm32f4xx_it.c ..\Inc\main.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_spi.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim_ex.h \
-  ..\Inc\stm32f4xx_it.h
+  ..\Inc\ads131m0x.h C:\Keil_v5\ARM\ARMCLANG\include\assert.h \
+  C:\Keil_v5\ARM\ARMCLANG\include\stdbool.h ..\Inc\hal.h \
+  ..\Inc\sub_functions.h ..\Inc\stm32f4xx_it.h

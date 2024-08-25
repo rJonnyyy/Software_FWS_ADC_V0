@@ -25,9 +25,11 @@ extern "C" {
 #endif
 
 /* Includes ------------------------------------------------------------------*/
-#include "main.h"
+#include "ads131m0x.h"
 
 void irgendwas(void);
+void ITM_SendString(const char *str);
+void type_conversion01(adc_channel_data *Nutzdaten,  uint8_t outputArray[8]);
 
 
 #ifdef __cplusplus

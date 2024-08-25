@@ -31,7 +31,8 @@ extern "C" {
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "ads131m0x.h"
+#include "sub_functions.h"
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/

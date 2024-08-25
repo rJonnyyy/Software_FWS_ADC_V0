@@ -36,6 +36,8 @@
 #include "spi.h"
 
 
+
+
 //****************************************************************************
 //
 // Internal variables
@@ -619,7 +621,7 @@ uint8_t spiSendReceiveByte(uint8_t dataTx)
     while (HAL_DataGetNonBlocking(SPI1_BASE, &junk));
 
     // SSI TX & RX
-    uint8_t dataRx;
+    uint8_t dataRx = 0xFF;
 	
 		HAL_SPI_Transmit(&hspi1, &dataTx, 1, HAL_MAX_DELAY);
     //MAP_SSIDataPut(SSI_BASE_ADDR, (uint32_t) dataTx);

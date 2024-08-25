@@ -32,6 +32,8 @@
  */
 
 #include "ads131m0x.h"
+#include "sub_functions.h"
+#include "main.h"
 
 
 //****************************************************************************
@@ -105,13 +107,13 @@ void adcStartup(void)
 
 	/* (REQUIRED) Set nRESET pin high for ADC operation */
 	setSYNC_RESET(HIGH);
-
-	
+  
 	
 	/* (OPTIONAL) Toggle nRESET pin to ensure default register settings. */
 	/* NOTE: This also ensures that the device registers are unlocked.	 */
 	toggleRESET();
 	
+	ITM_SendString("Reset done \n");
 	delay_ms(50);
 	
 
@@ -120,7 +122,17 @@ void adcStartup(void)
 
     /* (OPTIONAL) Validate first response word when beginning SPI communication: (0xFF20 | CHANCNT) */
 	uint16_t response = sendCommand(OPCODE_NULL);
-
+	ITM_SendString("should be 0xFF20 \n");
+	
+	uint16_t comp_response = (0xFF20 | CHANCNT);
+	ITM_SendString(" \n");
+	
+	
+	if (comp_response == response){
+		ITM_SendChar(response);
+		ITM_SendString("correct first response");
+	}
+	
 	/* Define your initial register settings here */
 	//Change the OSR-Value to 256
     writeSingleRegister(CLOCK_ADDRESS, (CLOCK_DEFAULT & ~CLOCK_OSR_MASK) | CLOCK_OSR_256);

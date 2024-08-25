@@ -41,7 +41,7 @@ extern "C" {
 #endif
 
 /* Includes ------------------------------------------------------------------*/
-#include "main.h"
+
 // Standard libraries
 #include <assert.h>
 #include <stdint.h>
@@ -1697,7 +1697,6 @@ int32_t     signExtend(const uint8_t dataBytes[]);
 
 /** Data rate register field setting */
 #define POWER_MODE          ((uint8_t) ((getRegisterValue(CLOCK_ADDRESS) & CLOCK_PWR_MASK) >> 0))
-
 
 
 #endif /* ADS131M0X_H_ */

@@ -1,5 +1,8 @@
 adc_software/sub_functions.o: ..\Src\sub_functions.c \
-  ..\Inc\sub_functions.h ..\Inc\main.h \
+  ..\Inc\sub_functions.h ..\Inc\ads131m0x.h \
+  C:\Keil_v5\ARM\ARMCLANG\include\assert.h \
+  C:\Keil_v5\ARM\ARMCLANG\include\stdint.h \
+  C:\Keil_v5\ARM\ARMCLANG\include\stdbool.h ..\Inc\hal.h ..\Inc\main.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h \
   ..\Inc\stm32f4xx_hal_conf.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rcc.h \
@@ -7,7 +10,6 @@ adc_software/sub_functions.o: ..\Src\sub_functions.c \
   ..\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h \
   ..\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f405xx.h \
   ..\Drivers\CMSIS\Include\core_cm4.h \
-  C:\Keil_v5\ARM\ARMCLANG\include\stdint.h \
   C:\Dev\Starkstrom\ADC_Software\Drivers\CMSIS\Include\cmsis_version.h \
   C:\Dev\Starkstrom\ADC_Software\Drivers\CMSIS\Include\cmsis_compiler.h \
   C:\Dev\Starkstrom\ADC_Software\Drivers\CMSIS\Include\cmsis_armclang.h \

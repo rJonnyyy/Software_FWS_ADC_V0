@@ -27,6 +27,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGINIncludes */
 #include "ads131m0x.h"
+#include "sub_functions.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -49,6 +50,9 @@
 /* USER CODE BEGIN PV */
 uint8_t ADC_Platine_F = 1;
 uint8_t TxData_ADC[8];	
+bool ITM_debug = 1;
+
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -70,6 +74,7 @@ int main(void)
 {
 
   /* USER CODE BEGIN 1 */
+	
 	
 	
   /* USER CODE END 1 */
@@ -122,10 +127,21 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+	ITM_SendString("Test");
+	adc_channel_data ADC_Daten;
+	
+//  ADC_Daten.response = 0;
+//	ADC_Daten.crc = 0;
+//	ADC_Daten.channel0 = 0;
+//	ADC_Daten.channel1 = 0;
+//	ADC_Daten.channel2 = 0;
+//	ADC_Daten.channel3 = 0;
+
   while (1)
   {
     /* USER CODE END WHILE */
-			TxData_ADC[7] = 0xFF;
+			readData(&ADC_Daten);
+		  type_conversion01(&ADC_Daten, TxData_ADC);
 			can_send_ADC(TxData_ADC);
 			delay_ms(500);
     /* USER CODE BEGIN 3 */
